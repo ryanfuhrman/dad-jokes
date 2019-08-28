@@ -11,10 +11,20 @@ export default class JokeList extends Component {
     }
   }
 
+  componentWillMount() {
+    localStorage.getItem('jokes') && this.setState({
+      jokes: JSON.parse(localStorage.getItem('jokes'))
+    })
+  }
+
   componentDidMount() {
-    if (this.state.jokes.length === 0){
+    if (!localStorage.getItem('jokes')) {
       this.getJokes();
     }
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    localStorage.setItem('jokes', JSON.stringify(nextState.jokes))
   }
 
   getJokes = async () => {
@@ -34,14 +44,24 @@ export default class JokeList extends Component {
 
   updateScore = (id, score) => {
     const currentJokes = [...this.state.jokes];
-
     currentJokes.map(joke => joke.id === id ? joke.score = score : joke.score );
 
     this.setState({
       jokes: currentJokes
     });
+
+    this.updateOrder();
   } 
- 
+
+  updateOrder = () => {
+    this.setState(st => ({
+      jokes: [...st.jokes].sort((a, b) => {
+        return b.score - a.score;
+      })
+    }))
+  }
+
+  
   render() {
     return (
       <div>
