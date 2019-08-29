@@ -35,7 +35,7 @@ export default class JokeList extends Component {
       const newJoke = { joke: response.data.joke, id: response.data.id, score: 0 }
 
       // check if joke is already in list
-      if (this.state.jokes.some(joke => joke.id === newJoke.id)) {
+      if (this.state.jokes.some(joke => joke.id === newJoke.id) || this.state.jokes.some(joke => joke.joke.length > 200)) {
         i--;
       } else (
         this.setState(st => ({
@@ -73,11 +73,11 @@ export default class JokeList extends Component {
         </div>
         <div className="JokeList-jokes-container">
         {this.state.jokes.length < 10 ? <span className="loading fas fa-spinner"/> : 
-          <div className="JokeList-jokes">
+          <ul className="JokeList-jokes">
             {this.state.jokes.map(({joke, id, score}) => (
               <Joke joke={joke} key={id} id={id} score={score} updateScore={this.updateScore} />
             ))}
-          </div>
+          </ul>
         }
         </div>
       </div>

@@ -17,7 +17,7 @@ export default class Joke extends Component {
   render() {
     const {joke} = this.props;
     return (
-      <div className="Joke">
+      <li className="Joke">
         <div className="Joke-score-div">
           <button onClick={this.upvote} className="fas fa-arrow-up" />
           <span>{this.props.score}</span>
@@ -26,7 +26,7 @@ export default class Joke extends Component {
         <div className="Joke-string-div">
         <p className="Joke-string">{joke}</p>
         </div>
-      </div>
+      </li>
     )
   }
 }
