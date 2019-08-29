@@ -31,22 +31,37 @@
 }
 
 .JokeList-jokes-container {
-  height: 600px;
-  width: 815px;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  height: 600px;
+  width: 815px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid black;
 }
 
 .JokeList-jokes {
+  position: absolute;
+  height: 100%;
+  width: 100%;
   overflow: scroll;
+  overflow-x: hidden;
+  box-sizing: content-box;
+  margin-left: 15px;
 }
 
-.JokeList-jokes::-webkit-scrollbar {
+/* .JokeList-jokes::-webkit-scrollbar {
   width: 12px;
-}
+} */
 
-.JokeList-jokes::-webkit-scrollbar-track {
+/* .JokeList-jokes.scroll::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
 }
+
+.JokeList-jokes.scroll::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+} */
