@@ -1,0 +1,52 @@
+.JokeList {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.JokeList-dash {
+  margin-right: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.JokeList-btn {
+}
+
+.loading {
+  font-size: 50px;
+  animation: rotate 1.5s infinite linear;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.JokeList-jokes-container {
+  height: 600px;
+  width: 815px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.JokeList-jokes {
+  overflow: scroll;
+}
+
+.JokeList-jokes::-webkit-scrollbar {
+  width: 12px;
+}
+
+.JokeList-jokes::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}

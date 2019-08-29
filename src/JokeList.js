@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import Joke from './Joke'
+import "./JokeList.css"
+
 
 export default class JokeList extends Component {
   static defaultProps = {newJokesCount: 10}
@@ -64,11 +66,20 @@ export default class JokeList extends Component {
   
   render() {
     return (
-      <div>
-        {this.state.jokes.length < 10 ? "Loading..." : this.state.jokes.map(({joke, id, score}) => (
-          <Joke joke={joke} key={id} id={id} score={score} updateScore={this.updateScore} />
-        ))}
-        <button onClick={this.getJokes}>Get More Jokes</button>
+      <div className="JokeList">
+        <div className="JokeList-dash">
+          <h1>Dad Jokes</h1>
+          <button className="JokeList-btn" onClick={this.getJokes}>Get More Jokes</button>
+        </div>
+        <div className="JokeList-jokes-container">
+        {this.state.jokes.length < 10 ? <span className="loading fas fa-spinner"/> : 
+          <div className="JokeList-jokes">
+            {this.state.jokes.map(({joke, id, score}) => (
+              <Joke joke={joke} key={id} id={id} score={score} updateScore={this.updateScore} />
+            ))}
+          </div>
+        }
+        </div>
       </div>
     )
   }

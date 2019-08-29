@@ -1,0 +1,19 @@
+.Joke {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.Joke-score-div {
+  width: 100px;
+}
+
+.Joke-string-div {
+  display: flex;
+  justify-content: flex-start;
+  /* align-content: center; */
+  width: 700px;
+}
+
+.Joke-string {
+}
