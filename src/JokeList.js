@@ -9,14 +9,8 @@ export default class JokeList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      jokes: []
+      jokes: localStorage.getItem('jokes') ? JSON.parse(localStorage.getItem('jokes')) : []
     }
-  }
-
-  componentWillMount() {
-    localStorage.getItem('jokes') && this.setState({
-      jokes: JSON.parse(localStorage.getItem('jokes'))
-    })
   }
 
   componentDidMount() {
@@ -25,8 +19,10 @@ export default class JokeList extends Component {
     }
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    localStorage.setItem('jokes', JSON.stringify(nextState.jokes))
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.jokes !== this.state.jokes) {
+      localStorage.setItem('jokes', JSON.stringify(this.state.jokes))
+    }
   }
 
   getJokes = async () => {
