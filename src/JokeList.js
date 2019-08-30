@@ -64,8 +64,9 @@ export default class JokeList extends Component {
     return (
       <div className="JokeList">
         <div className="JokeList-dash">
-          <h1>Dad Jokes</h1>
-          <button className="JokeList-btn" onClick={this.getJokes}>Get More Jokes</button>
+          <h1 className="JokeList-title"><span className="dad">Dad</span> <span className="jokes">Jokes</span></h1>
+          <span className="JokeList-emoji">🤣</span>
+          <button className="JokeList-btn" onClick={this.getJokes}>More Funnies</button>
         </div>
         <div className="JokeList-jokes-container">
         {this.state.jokes.length < 10 ? <span className="loading fas fa-spinner"/> : 
