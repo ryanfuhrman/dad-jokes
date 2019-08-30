@@ -65,7 +65,7 @@ export default class JokeList extends Component {
       <div className="JokeList">
         <div className="JokeList-dash">
           <h1 className="JokeList-title"><span className="dad">Dad</span> <span className="jokes">Jokes</span></h1>
-          <span className="JokeList-emoji">🤣</span>
+          <span role="img" aria-label="rolling on floor laughing" className="JokeList-emoji">🤣</span>
           <button className="JokeList-btn" onClick={this.getJokes}>More Funnies</button>
         </div>
         <div className="JokeList-jokes-container">
