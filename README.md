@@ -1,6 +1,6 @@
 # dad-jokes
 
-![](img/dadJokesDemo.gif)
+![](img/dadJokeDemo.gif)
 
 The Dad Jokes project as part of [Colt Steele's The Modern React Bootcamp](https://www.udemy.com/modern-react-bootcamp/) course.
 
