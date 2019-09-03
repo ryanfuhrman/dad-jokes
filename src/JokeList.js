@@ -1,19 +1,22 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import uuid from 'uuid';
 import Joke from './Joke'
 import "./JokeList.css"
 
 
 export default class JokeList extends Component {
-  static defaultProps = {newJokesCount: 10}
+  static defaultProps = {numOfJokes: 10}
   constructor(props) {
     super(props);
     this.state = {
-      jokes: localStorage.getItem('jokes') ? JSON.parse(localStorage.getItem('jokes')) : []
+      jokes: localStorage.getItem('jokes') ? JSON.parse(localStorage.getItem('jokes')) : [],
+      loading: false,
     }
   }
 
   componentDidMount() {
+
     if (!localStorage.getItem('jokes')) {
       this.getJokes();
     }
@@ -26,18 +29,18 @@ export default class JokeList extends Component {
   }
 
   getJokes = async () => {
-    for (let i = 0; i < this.props.newJokesCount; i++) {
-      const response = await axios.get('https://icanhazdadjoke.com/', { headers: { Accept: "application/json" } });
-      const newJoke = { joke: response.data.joke, id: response.data.id, score: 0 }
-
-      // check if joke is already in list
-      if (this.state.jokes.some(joke => joke.id === newJoke.id) || this.state.jokes.some(joke => joke.joke.length > 200)) {
-        i--;
-      } else (
-        this.setState(st => ({
-          jokes: [...st.jokes, newJoke]
-        })));
+    let jokes = [];
+    while (jokes.length < this.props.numOfJokes) {
+      let res = await axios.get("https:icanhazdadjoke.com/", {headers: { Accept: "application/json" } });
+      jokes.push({ id: uuid(), text: res.data.joke, score: 0 });
     }
+    this.setState( st => ({
+      loading: false,
+      jokes: [...st.jokes, ...jokes],
+    }),
+    () =>
+      window.localStorage.setItem("jokes", JSON.stringify(this.state.jokes)));
+    this.updateOrder();
   }
 
   updateScore = (id, score) => {
@@ -59,6 +62,10 @@ export default class JokeList extends Component {
     }))
   }
 
+  handleClick = () => {
+    this.setState({ loading: true }, this.getJokes);
+  }
+
   
   render() {
     return (
@@ -66,13 +73,13 @@ export default class JokeList extends Component {
         <div className="JokeList-dash">
           <h1 className="JokeList-title"><span className="dad">Dad</span> <span className="jokes">Jokes</span></h1>
           <span role="img" aria-label="rolling on floor laughing" className="JokeList-emoji">🤣</span>
-          <button className="JokeList-btn" onClick={this.getJokes}>More Funnies</button>
+          <button className="JokeList-btn" onClick={this.handleClick}>More Jokes</button>
         </div>
         <div className="JokeList-jokes-container">
-        {this.state.jokes.length < 10 ? <span className="loading fas fa-spinner"/> : 
+        {this.state.loading ? <span className="loading fas fa-spinner"/> : 
           <ul className="JokeList-jokes">
-            {this.state.jokes.map(({joke, id, score}) => (
-              <Joke joke={joke} key={id} id={id} score={score} updateScore={this.updateScore} />
+            {this.state.jokes.map(({text, id, score}) => (
+              <Joke joke={text} key={id} id={id} score={score} updateScore={this.updateScore} />
             ))}
           </ul>
         }
