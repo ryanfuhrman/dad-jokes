@@ -81,10 +81,15 @@
 
 .JokeList-jokes {
   position: absolute;
-  height: 98%;
-  width: 98%;
+  height: 100%;
+  width: 100%;
   overflow: scroll;
   overflow-x: hidden;
+}
+
+.JokeList-jokes::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
 }
 
 @keyframes shake {
