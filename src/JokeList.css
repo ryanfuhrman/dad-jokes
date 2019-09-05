@@ -16,6 +16,7 @@
   align-items: center;
   background-color: #98dfea;
   border-radius: 6px;
+  box-shadow: 13px 14px 16px -7px rgba(0, 0, 0, 0.33);
 }
 
 .JokeList-title {
@@ -77,6 +78,7 @@
   overflow: hidden;
   border-radius: 0px 6px 6px 0px;
   background-color: #fff3ed;
+  box-shadow: 13px 14px 16px -7px rgba(0, 0, 0, 0.33);
 }
 
 .JokeList-jokes {
